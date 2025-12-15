@@ -14,7 +14,7 @@ body {
     display: flex;  /* Flexbox layout */
     justify-content: center;  /* Yatayda ortala */
     align-items: center;  /* Dikeyde ortala */
-    padding: 20px;  /* Kenar boşlukları */
+    padding: 20px 20px 60px 20px;  /* Kenar boşlukları - alt padding footer için */
     position: relative;  /* Pozisyon relative */
     overflow: hidden;  /* Taşan içeriği gizle */
 }
@@ -451,6 +451,31 @@ body {
     border: 1px solid #BBF7D0;  /* Açık yeşil border */
 }
 
+/* Footer stili */
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%);  /* Daha opak arka plan */
+    backdrop-filter: blur(15px);  /* Daha belirgin blur efekti */
+    padding: 14px 20px;
+    text-align: center;
+    z-index: 1000;  /* En üstte */
+    border-top: 2px solid rgba(99, 102, 241, 0.3);  /* Primary renk border */
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);  /* Üstten gölge */
+}
+
+.footer p {
+    margin: 0;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);  /* Metin gölgesi */
+}
+
 /* Responsive tasarım - Tablet ve mobil cihazlar için */
 @media (max-width: 768px) {
     .container {
@@ -490,6 +515,14 @@ body {
     
     .weather-message .calendar-day-temp {
         font-size: 11px;  /* Mobilde daha küçük font */
+    }
+    
+    .footer {
+        padding: 10px 16px;  /* Mobilde daha az padding */
+    }
+    
+    .footer p {
+        font-size: 12px;  /* Mobilde daha küçük font */
     }
 }
 

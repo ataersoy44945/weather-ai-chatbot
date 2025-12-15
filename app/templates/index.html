@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- Hava Durumu Chatbot Ana Sayfa HTML Template -->
+<html lang="tr">
+<head>
+    <!-- Meta etiketleri -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hava Durumu Chatbot</title>
+    <!-- CSS stil dosyasını yükle -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <!-- Arka plan video - Loop, sessiz -->
+    <video id="backgroundVideo" autoplay loop muted playsinline>
+        <source src="/static/video/Weather_Background_Loop_Video_Generation.mp4" type="video/mp4">
+    </video>
+    
+    <!-- Ana container -->
+    <div class="container">
+        <!-- Chat başlık bölümü -->
+        <div class="chat-header">
+            <h1>🌤️ Hava Durumu</h1>
+            <p>Anlık ve doğru hava tahmini</p>
+        </div>
+        
+        <!-- Chat içerik bölümü -->
+        <div class="chat-container">
+            <!-- Mesajlar listesi -->
+            <div id="messages" class="messages">
+                <!-- İlk hoş geldin mesajı (bot) -->
+                <div class="message bot-message">
+                    <span class="message-icon">🌤️</span>
+                    <div class="message-content">Merhaba! Size hava durumu hakkında yardımcı olabilirim. Bir şehir adı yazın veya "İstanbul'da hava nasıl?" gibi bir soru sorun.</div>
+                </div>
+            </div>
+            
+            <!-- Mesaj yazma ve gönderme bölümü -->
+            <div class="input-container">
+                <!-- Kullanıcı mesaj input alanı -->
+                <input 
+                    type="text" 
+                    id="messageInput" 
+                    placeholder="Şehir adı yazın..."
+                    autocomplete="off"
+                >
+                <!-- Gönder butonu -->
+                <button id="sendButton">
+                    <span>Gönder</span>
+                    <span style="display: none;">✈️</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript dosyasını yükle -->
+    <script src="/static/js/chat.js"></script>
+</body>
+</html>
+

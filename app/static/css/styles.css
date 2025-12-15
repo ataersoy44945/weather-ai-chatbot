@@ -1,0 +1,536 @@
+/* Hava Durumu Chatbot - Modern Tasarım CSS */
+
+/* Tüm elementler için varsayılan stilleri sıfırla */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body stilleri - Video arka plan */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    min-height: 100vh;  /* Minimum yükseklik viewport yüksekliği kadar */
+    display: flex;  /* Flexbox layout */
+    justify-content: center;  /* Yatayda ortala */
+    align-items: center;  /* Dikeyde ortala */
+    padding: 20px;  /* Kenar boşlukları */
+    position: relative;  /* Pozisyon relative */
+    overflow: hidden;  /* Taşan içeriği gizle */
+}
+
+/* Arka plan video stili */
+#backgroundVideo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    z-index: -1;  /* En arka planda */
+    object-fit: cover;  /* Ekranı kapla */
+    opacity: 0.3;  /* Hafif şeffaflık - içerik okunabilir olsun */
+}
+
+
+/* Ana container - Daha geniş ve okunabilir */
+.container {
+    width: 100%;  /* Tam genişlik */
+    max-width: 900px;  /* Daha geniş maksimum genişlik */
+    background: #FFFFFF;  /* Beyaz kart arka plan */
+    border-radius: 24px;  /* Daha yuvarlatılmış köşeler */
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.15);  /* Yumuşak gölge */
+    overflow: hidden;  /* Taşan içeriği gizle */
+    display: flex;  /* Flexbox layout */
+    flex-direction: column;  /* Dikey sıralama */
+    height: 85vh;  /* Viewport yüksekliğinin %85'i */
+    max-height: 900px;  /* Daha yüksek maksimum yükseklik */
+    border: 1px solid #E5E7EB;  /* Hafif border */
+    position: relative;  /* Z-index için */
+    z-index: 1;  /* Emoji'lerin üstünde */
+}
+
+/* Chat başlık bölümü - Daha büyük ve modern */
+.chat-header {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.95) 0%, rgba(14, 165, 233, 0.95) 100%);  /* Şeffaf gradient */
+    backdrop-filter: blur(10px);  /* Blur efekti */
+    color: white;  /* Beyaz yazı rengi */
+    padding: 32px 24px;  /* Daha fazla padding */
+    text-align: center;  /* Metni ortala */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);  /* Hafif alt border */
+}
+
+/* Başlık yazı stili - Daha büyük font */
+.chat-header h1 {
+    font-size: 32px;  /* Daha büyük font */
+    font-weight: 700;  /* Kalın yazı */
+    margin-bottom: 8px;  /* Alt boşluk */
+    color: #0F172A;  /* Koyu başlık rengi */
+    letter-spacing: -0.5px;  /* Harf aralığı */
+}
+
+/* Alt başlık yazı stili */
+.chat-header p {
+    font-size: 15px;  /* Font boyutu */
+    color: #334155;  /* Normal metin rengi */
+    opacity: 0.9;  /* Hafif şeffaflık */
+    font-weight: 400;  /* Normal kalınlık */
+}
+
+/* Chat container - Mesajlar ve input alanını içerir */
+.chat-container {
+    display: flex;  /* Flexbox layout */
+    flex-direction: column;  /* Dikey sıralama */
+    height: 100%;  /* Tam yükseklik */
+    overflow: hidden;  /* Taşan içeriği gizle */
+    background: #F8FAFC;  /* Açık arka plan */
+}
+
+/* Mesajlar bölümü - Scroll edilebilir alan */
+.messages {
+    flex: 1;  /* Kalan alanı kapla */
+    overflow-y: auto;  /* Dikey scroll */
+    overflow-x: hidden;  /* Yatay scroll'u gizle */
+    padding: 32px 28px;  /* Daha fazla iç boşluk */
+    background: #F8FAFC;  /* Açık arka plan */
+    display: flex;  /* Flexbox layout */
+    flex-direction: column;  /* Dikey sıralama */
+    gap: 24px;  /* Mesajlar arası boşluk (artırıldı) */
+}
+
+/* Scrollbar'ı gizle veya çok ince yap */
+.messages::-webkit-scrollbar {
+    width: 4px;  /* Çok ince scrollbar */
+}
+
+.messages::-webkit-scrollbar-track {
+    background: transparent;  /* Şeffaf arka plan */
+}
+
+.messages::-webkit-scrollbar-thumb {
+    background: #CBD5E1;  /* Açık gri */
+    border-radius: 2px;  /* Yuvarlatılmış köşeler */
+}
+
+.messages::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;  /* Biraz daha koyu */
+}
+
+/* Tek bir mesaj container'ı */
+.message {
+    display: flex;  /* Flexbox layout */
+    align-items: flex-start;  /* Üstten hizala */
+    gap: 8px;  /* İkon ve mesaj arası boşluk */
+    animation: fadeIn 0.4s ease-out;  /* Daha yumuşak fade in animasyonu */
+}
+
+/* Mesaj görünme animasyonu - Daha yumuşak */
+@keyframes fadeIn {
+    from {
+        opacity: 0;  /* Başlangıçta görünmez */
+        transform: translateY(12px);  /* 12px aşağıdan başla */
+    }
+    to {
+        opacity: 1;  /* Sonunda görünür */
+        transform: translateY(0);  /* Normal pozisyon */
+    }
+}
+
+/* Kullanıcı mesajı - Sağa hizalı */
+.user-message {
+    flex-direction: row-reverse;  /* İkon sağda olsun */
+    align-items: flex-end;  /* Alt hizalama */
+}
+
+/* Bot mesajı - Sola hizalı */
+.bot-message {
+    justify-content: flex-start;  /* Sola hizala */
+}
+
+/* Mesaj ikonu */
+.message-icon {
+    font-size: 20px;  /* İkon boyutu */
+    flex-shrink: 0;  /* Küçülmesin */
+    margin-top: 2px;  /* Hafif yukarı kaydır */
+}
+
+/* Mesaj içeriği balonu */
+.message-content {
+    max-width: 80%;  /* Daha geniş maksimum genişlik */
+    padding: 16px 22px;  /* Daha fazla padding */
+    border-radius: 20px;  /* Yuvarlatılmış köşeler */
+    word-wrap: break-word;  /* Uzun kelimeleri kır */
+    white-space: normal;  /* Normal boşluk işleme (pre-wrap yerine) */
+    line-height: 1.7;  /* Daha fazla satır yüksekliği */
+    font-size: 16px;  /* Daha büyük font boyutu */
+    position: relative;  /* Pozisyon relative */
+    word-spacing: normal;  /* Normal kelime aralığı */
+    box-sizing: border-box;  /* Padding dahil genişlik hesaplama */
+    overflow-x: auto;  /* Yatay taşma durumunda scroll */
+}
+
+/* Kullanıcı mesajı içeriği - Primary renk */
+.user-message .message-content {
+    background: #6366F1;  /* Indigo primary renk */
+    color: white;  /* Beyaz yazı */
+    border-bottom-right-radius: 6px;  /* Sağ alt köşeyi daha az yuvarlat (yön hissi) */
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);  /* Hafif gölge */
+    text-align: right;  /* Metni sağa hizala */
+}
+
+/* Bot mesajı içeriği - Açık gri arka plan */
+.bot-message .message-content {
+    background: #F1F5F9;  /* Açık gri arka plan */
+    color: #334155;  /* Koyu metin rengi */
+    border: 1px solid #E5E7EB;  /* Border rengi */
+    border-bottom-left-radius: 6px;  /* Sol alt köşeyi daha az yuvarlat (yön hissi) */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);  /* Çok hafif gölge */
+}
+
+/* Hava durumu mesajı için özel stil */
+.weather-message {
+    background: linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%);
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    padding: 20px;  /* Padding azaltıldı */
+    margin: 8px 0;
+    width: 100%;  /* Tam genişlik */
+    max-width: 100%;  /* Maksimum genişlik */
+    box-sizing: border-box;  /* Padding dahil genişlik hesaplama */
+    overflow-x: hidden;  /* Yatay taşmayı gizle */
+}
+
+/* Aylık takvim için özel stiller */
+.weather-message.monthly-calendar {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;  /* Yatay taşmayı gizle */
+    box-sizing: border-box;
+    padding: 20px 16px;  /* Daha az padding */
+}
+
+.weather-message .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));  /* minmax ile taşmayı önle */
+    gap: 8px;  /* Gap azaltıldı */
+    margin-bottom: 24px;  /* Alt margin artırıldı - not ile arasında boşluk */
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.weather-message .calendar-day-header {
+    text-align: center;
+    font-weight: 700;
+    color: #64748B;
+    font-size: 12px;  /* Font küçültüldü */
+    padding: 8px 2px;  /* Padding azaltıldı */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-sizing: border-box;
+}
+
+.weather-message .calendar-day-cell {
+    aspect-ratio: 1;
+    min-height: 0;  /* min-height kaldırıldı, aspect-ratio yeterli */
+    width: 100%;
+    max-width: 100%;
+    background: #FFFFFF;
+    border: 2px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 6px;  /* Padding azaltıldı */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.weather-message .calendar-day-cell:hover {
+    border-color: #6366F1;
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+.weather-message .calendar-day-cell.weekend {
+    background: #F0F4FF;
+}
+
+.weather-message .calendar-day-cell.empty {
+    background: #F8FAFC;
+    border: 1px solid #E5E7EB;
+    opacity: 0.5;
+    cursor: default;
+}
+
+.weather-message .calendar-day-cell.empty:hover {
+    transform: none;
+    border-color: #E5E7EB;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.weather-message .calendar-day-number {
+    font-weight: 700;
+    color: #0F172A;
+    font-size: 13px;  /* Font küçültüldü */
+    align-self: flex-start;
+    line-height: 1.2;
+}
+
+.weather-message .calendar-day-icon {
+    font-size: 22px;  /* İkon küçültüldü */
+    margin: 2px 0;  /* Margin azaltıldı */
+    flex-shrink: 0;  /* İkon küçülmesin */
+}
+
+.weather-message .calendar-day-temp {
+    font-size: 11px;  /* Font küçültüldü */
+    color: #64748B;
+    font-weight: 600;
+    align-self: flex-end;
+    line-height: 1.2;
+}
+
+.weather-message .calendar-empty-cell {
+    aspect-ratio: 1;
+    min-height: 0;  /* min-height kaldırıldı */
+    width: 100%;
+    max-width: 100%;
+    background: transparent;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.weather-message .calendar-note {
+    margin-top: 24px;  /* Margin artırıldı */
+    margin-bottom: 8px;  /* Alt margin eklendi */
+    padding: 16px;
+    background: #F8FAFC;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #64748B;
+    line-height: 1.6;
+    clear: both;  /* Float temizleme */
+    display: block;  /* Block element */
+}
+
+.weather-temp {
+    font-size: 36px;
+    font-weight: 700;
+    color: #0F172A;
+    line-height: 1;
+    margin: 8px 0;
+}
+
+.weather-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #64748B;
+}
+
+.weather-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Input container - Mesaj yazma alanı */
+.input-container {
+    display: flex;  /* Flexbox layout */
+    padding: 20px 28px;  /* Daha fazla iç boşluk */
+    background: #FFFFFF;  /* Beyaz arka plan */
+    border-top: 1px solid #E5E7EB;  /* Üst kenarlık */
+    gap: 16px;  /* Daha fazla elemanlar arası boşluk */
+    align-items: center;  /* Dikeyde ortala */
+}
+
+/* Mesaj input alanı - Tam yuvarlak (pill shape) */
+#messageInput {
+    flex: 1;  /* Kalan alanı kapla */
+    padding: 16px 24px;  /* Daha fazla padding */
+    border: 2px solid #E5E7EB;  /* Border rengi */
+    border-radius: 50px;  /* Tam yuvarlak (pill shape) */
+    font-size: 16px;  /* Daha büyük font boyutu */
+    outline: none;  /* Focus outline'ı kaldır */
+    transition: all 0.2s ease;  /* Tüm geçişler için animasyon */
+    background: #F8FAFC;  /* Açık arka plan */
+    color: #334155;  /* Metin rengi */
+}
+
+/* Placeholder rengi */
+#messageInput::placeholder {
+    color: #94A3B8;  /* Placeholder rengi */
+}
+
+/* Input focus durumu - Primary renk */
+#messageInput:focus {
+    border-color: #6366F1;  /* Primary renk border */
+    background: #FFFFFF;  /* Beyaz arka plan */
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);  /* Hafif glow efekti */
+}
+
+/* Gönder butonu - Primary renk */
+#sendButton {
+    padding: 16px 32px;  /* Daha fazla iç boşluk */
+    background: #6366F1;  /* Primary renk */
+    color: white;  /* Beyaz yazı */
+    border: none;  /* Kenarlık yok */
+    border-radius: 50px;  /* Tam yuvarlak */
+    font-size: 16px;  /* Daha büyük font boyutu */
+    font-weight: 600;  /* Kalın yazı */
+    cursor: pointer;  /* İmleç pointer */
+    transition: all 0.2s ease;  /* Tüm geçişler için animasyon */
+    display: flex;  /* Flexbox */
+    align-items: center;  /* Dikeyde ortala */
+    justify-content: center;  /* Yatayda ortala */
+    gap: 8px;  /* Daha fazla ikon ve yazı arası boşluk */
+    min-width: 120px;  /* Daha geniş minimum genişlik */
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);  /* Hafif gölge */
+}
+
+/* Buton hover durumu - Büyüme efekti */
+#sendButton:hover:not(:disabled) {
+    transform: scale(1.05);  /* %5 büyüt */
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);  /* Daha belirgin gölge */
+    background: #4F46E5;  /* Biraz daha koyu */
+}
+
+/* Buton tıklama durumu */
+#sendButton:active:not(:disabled) {
+    transform: scale(0.98);  /* Biraz küçült */
+}
+
+/* Buton devre dışı durumu */
+#sendButton:disabled {
+    opacity: 0.6;  /* Şeffaflık */
+    cursor: not-allowed;  /* Yasak imleci */
+    transform: none;  /* Transform yok */
+}
+
+/* Loading indicator - Dönen yükleme animasyonu */
+.loading {
+    display: inline-block;  /* Inline block */
+    width: 18px;  /* Genişlik */
+    height: 18px;  /* Yükseklik */
+    border: 2px solid rgba(99, 102, 241, 0.2);  /* Şeffaf primary renk kenarlık */
+    border-radius: 50%;  /* Yuvarlak */
+    border-top-color: #6366F1;  /* Üst kenarlık primary renk */
+    animation: spin 0.8s linear infinite;  /* Döndürme animasyonu */
+    margin-right: 8px;  /* Sağ boşluk */
+}
+
+/* Döndürme animasyonu */
+@keyframes spin {
+    to { transform: rotate(360deg); }  /* 360 derece döndür */
+}
+
+/* Hata mesajı stili */
+.error-message {
+    background: #FEF2F2;  /* Açık kırmızı arka plan */
+    color: #DC2626;  /* Kırmızı yazı */
+    border: 1px solid #FECACA;  /* Açık kırmızı border */
+    padding: 12px 16px;  /* İç boşluk */
+    border-radius: 12px;  /* Yuvarlatılmış köşeler */
+    font-size: 14px;  /* Font boyutu */
+}
+
+/* Başarı mesajı stili */
+.success-message {
+    background: #F0FDF4;  /* Açık yeşil arka plan */
+    color: #16A34A;  /* Yeşil yazı */
+    border: 1px solid #BBF7D0;  /* Açık yeşil border */
+}
+
+/* Responsive tasarım - Tablet ve mobil cihazlar için */
+@media (max-width: 768px) {
+    .container {
+        max-width: 95%;  /* Biraz kenar boşluğu bırak */
+        height: 90vh;  /* Biraz daha yüksek */
+    }
+    
+    .messages {
+        padding: 24px 20px;  /* Biraz daha az padding */
+    }
+    
+    .message-content {
+        max-width: 85%;  /* Mobilde daha geniş */
+        font-size: 15px;  /* Biraz daha küçük font */
+    }
+    
+    .weather-message {
+        padding: 20px 16px;  /* Mobilde daha az padding */
+    }
+    
+    .weather-message .calendar-day-cell {
+        min-height: 70px;  /* Mobilde daha küçük hücreler */
+        padding: 6px;
+    }
+    
+    .weather-message .calendar-empty-cell {
+        min-height: 70px;
+    }
+    
+    .weather-message .calendar-day-icon {
+        font-size: 20px;  /* Mobilde daha küçük ikon */
+    }
+    
+    .weather-message .calendar-day-number {
+        font-size: 13px;  /* Mobilde daha küçük font */
+    }
+    
+    .weather-message .calendar-day-temp {
+        font-size: 11px;  /* Mobilde daha küçük font */
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        max-width: 100%;  /* Tam genişlik */
+        height: 100vh;  /* Tam yükseklik */
+        border-radius: 0;  /* Köşeleri yuvarlatma */
+        max-height: none;  /* Maksimum yükseklik yok */
+    }
+    
+    .chat-header {
+        padding: 24px 20px;  /* Daha az padding */
+    }
+    
+    .chat-header h1 {
+        font-size: 28px;  /* Daha küçük font */
+    }
+    
+    .messages {
+        padding: 20px 16px;  /* Daha az padding */
+        gap: 16px;  /* Daha az gap */
+    }
+    
+    .message-content {
+        font-size: 14px;  /* Mobilde biraz daha küçük */
+        padding: 12px 18px;  /* Biraz daha az padding */
+    }
+    
+    .input-container {
+        padding: 16px 20px;  /* Daha az padding */
+    }
+    
+    #messageInput {
+        font-size: 15px;  /* Biraz daha küçük */
+        padding: 14px 20px;  /* Biraz daha az padding */
+    }
+    
+    #sendButton {
+        padding: 14px 24px;  /* Biraz daha az padding */
+        font-size: 15px;  /* Biraz daha küçük font */
+        min-width: 100px;  /* Daha küçük minimum genişlik */
+    }
+}
